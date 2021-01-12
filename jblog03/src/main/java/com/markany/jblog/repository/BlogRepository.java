@@ -1,5 +1,7 @@
 package com.markany.jblog.repository;
 
+import java.util.Optional;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,10 @@ public class BlogRepository {
 
 	public BlogVo findById(String id) {
 		return sqlSession.selectOne("blog.findById", id);
+	}
+
+	public int update(BlogVo vo) {
+		return sqlSession.update("blog.update", vo);
 	}
 
 }

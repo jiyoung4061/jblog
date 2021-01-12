@@ -8,6 +8,15 @@
 			values(#{id}, #{name}, #{password}, now())
 		]]>
 	</insert>
+	
+	<select id="findByIdAndPassword" parameterType="uservo"
+		resultType="uservo">
+		<![CDATA[
+			select id, name, password  
+			from user  
+			where id=#{id} and password = #{password}
+		]]>
+	</select>
 
 	<select id="findById" parameterType="string" resultType="uservo">
 		<![CDATA[
@@ -26,14 +35,6 @@
 	</select>
 
 
-	<select id="findByEmailAndPassword" parameterType="uservo"
-		resultType="uservo">
-		<![CDATA[
-			select no, name, role  
-			from user  
-			where email=#{email} and password = #{password}
-		]]>
-	</select>
 
 	<select id="findByEmailAndPassword2" parameterType="map"
 		resultType="uservo">

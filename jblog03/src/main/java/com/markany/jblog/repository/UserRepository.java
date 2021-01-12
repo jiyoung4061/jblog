@@ -15,8 +15,11 @@ public class UserRepository {
 		return sqlSession.insert("user.insert", userVo);
 	}
 	
+	public UserVo findByIdAndPassword(UserVo userVo) {
+		return sqlSession.selectOne("user.findByIdAndPassword", userVo);
+	}
+	
 	public UserVo findById(String id) {
-		UserVo vo = sqlSession.selectOne("user.findById", id);
-		return vo;
+		return sqlSession.selectOne("user.findById", id);
 	}
 }

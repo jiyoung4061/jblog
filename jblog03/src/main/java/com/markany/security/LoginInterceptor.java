@@ -17,14 +17,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
 		UserVo vo = new UserVo();
+		vo.setId(id);
 		vo.setPassword(password);
 		
 		// userService 주입하기!!
 		UserVo authUser = userService.getUser(vo);
-		if(authUser == null) {
+		if(authUser == null) { // 로그인 실패
 			request.setAttribute("userVo", vo);
 			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
 			return false;

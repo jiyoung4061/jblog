@@ -15,4 +15,12 @@
 		</selectKey>
 	</insert>
 	
+	<select id="find" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+			select no, name, description, reg_date, id
+			from category
+			where id=#{id}
+		]]>
+	</select>
+	
 </mapper>

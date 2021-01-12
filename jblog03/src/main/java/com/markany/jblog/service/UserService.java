@@ -27,7 +27,8 @@ public class UserService {
 		int count = 0;
 
 		userRepository.insert(userVo);
-		userVo = userRepository.findById(userVo.getId());
+		
+//		userVo = userRepository.findById(userVo.getId());
 		blogVo.setId(userVo.getId());
 		blogVo.setLogo("default-img.jpg");
 		blogVo.setTitle("기본페이지");
@@ -43,7 +44,6 @@ public class UserService {
 	}
 
 	public UserVo getUser(UserVo vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findByIdAndPassword(vo);
 	}
 }
