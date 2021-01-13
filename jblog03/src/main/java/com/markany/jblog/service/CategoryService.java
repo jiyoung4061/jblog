@@ -21,4 +21,13 @@ public class CategoryService {
 		int count = categoryRepository.insert(vo);
 		return count == 1;
 	}
+
+//	public List<Long> getPostCount(String id) {
+//		return categoryRepository.findPostCountOfCategory(id);
+//	}
+
+	public boolean deleteCategory(Long no) {
+		int count = categoryRepository.delete(no);
+		return count == 1;
+	}
 }

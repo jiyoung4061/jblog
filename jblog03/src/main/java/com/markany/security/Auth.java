@@ -8,6 +8,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE}) // 이 annotation이 어디로 갈것인가!(method면 method로 가서 붙는다!)
 @Retention(RetentionPolicy.RUNTIME) // 종속기간-anntation의 유지기간!
 public @interface Auth {
-	public String value() default "HOST"; 
-	public Role role() default Role.HOST;
+	public String value() default "USER";
 }

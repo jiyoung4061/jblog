@@ -20,6 +20,7 @@ import com.markany.jblog.vo.BlogVo;
 import com.markany.jblog.vo.CategoryVo;
 import com.markany.jblog.vo.UserVo;
 import com.markany.security.Auth;
+import com.markany.security.AuthUser;
 
 @Controller
 @RequestMapping("/{id:(?!assets).*}")
@@ -44,7 +45,12 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping(value="/blog/admin", method=RequestMethod.GET)
-	public String admin() {
+	public String admin(@PathVariable String id,@AuthUser UserVo authUser) {
+		System.out.println("id>>>>"+id);
+		System.out.println("auth>>>>"+authUser.getId());
+		if(!id.equals(authUser.getId())) {
+			return "redirect:/"+authUser.getId();
+		}
 		return "blog/blog-admin-basic";
 	}
 	
@@ -57,25 +63,21 @@ public class BlogController {
 		}
 		blogService.setMain(vo);
 		model.addAttribute("blogVo", vo);
-		return "blog/blog-main";
+		return "redirect:/"+vo.getId()+"blog/blog-main";
 	}
 	
 	@RequestMapping("/blog/admin/category")
 	public String adminCategory(@PathVariable String id, Model model) {
 		List<CategoryVo> categoryVoList = categoryService.getCategoryList(id);
+//		List<Long> postCount = categoryService.getPostCount(id);
 		model.addAttribute("categoryVoList",categoryVoList);
 		return "blog/blog-admin-category";
 	}
 	
-	@RequestMapping("/blog/admin/write")
-	public String adminWrite() {
-		
-		return "blog/blog-admin-write";
-	}
-	
 	@Auth
 	@RequestMapping(value = "/category/add", method = RequestMethod.POST)
-	public String addCategory(@PathVariable String id, @ModelAttribute @Valid CategoryVo categoryVo, 
+	public String addCategory(@PathVariable String id, @AuthUser UserVo authUser, 
+								@ModelAttribute @Valid CategoryVo categoryVo, 
 								BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAllAttributes(result.getModel());
@@ -84,6 +86,19 @@ public class BlogController {
 		
 		categoryVo.setId(id);
 		categoryService.addCategory(categoryVo);
-		return "/blog/blog-main";
+		model.addAttribute("authUser", authUser);
+		return "redirect:/"+authUser.getId()+"/blog/admin/category";
+	}
+	
+	@RequestMapping("/blog/admin/write")
+	public String adminWrite() {
+		
+		return "blog/blog-admin-write";
+	}
+	@RequestMapping(value="/category/delete/{no}", method = RequestMethod.GET)
+	public String deleteCategory(@PathVariable Long no, @AuthUser UserVo authUser) {
+		System.out.println("no===>"+no);
+		categoryService.deleteCategory(no);
+		return "redirect:/"+authUser.getId()+"/blog/admin/category";
 	}
 }
