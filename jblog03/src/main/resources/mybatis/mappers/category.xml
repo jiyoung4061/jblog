@@ -17,7 +17,7 @@
 	
 	<select id="find" parameterType="string" resultType="categoryvo">
 		<![CDATA[
-			select no, name, description, reg_date, id
+			select no, name, description, reg_date as regDate, id
 			from category
 			where id=#{id}
 		]]>
@@ -43,4 +43,12 @@
 			delete from category where no = #{no};
 		]]>
 	</delete>
+	
+	<select id="findfirstno" parameterType="string" resultType="Long">
+		<![CDATA[
+			select min(no)
+			from category
+			where id=#{id}
+		]]>
+	</select>
 </mapper>

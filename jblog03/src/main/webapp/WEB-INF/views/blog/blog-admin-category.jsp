@@ -17,9 +17,9 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/blog/admin">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/admin">기본설정</a></li>
 					<li class="selected">카테고리</li>
-					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/blog/admin/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/admin/write">글작성</a></li>
 				</ul>
 				<table class="admin-cat">
 					<tr>
@@ -35,7 +35,7 @@
 							<td>${vo.name }</td>
 							<td>10</td>
 							<td>${vo.description }</td>
-							<td><a href="${pageContext.request.contextPath }/${authUser.getId() }/category/delete/${vo.no}"> 
+							<td><a href="${pageContext.request.contextPath }/${authUser.getId() }/admin/category/delete/${vo.no}"> 
 							<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
 							</a></td>
 						</tr>
@@ -44,7 +44,7 @@
 
 				<h4 class="n-c">새로운 카테고리 추가</h4>
 				<form
-					action="${pageContext.request.contextPath }/${authUser.getId()}/category/add"
+					action="${pageContext.request.contextPath }/${authUser.getId()}/admin/category/add"
 					method="post">
 					<table id="admin-cat-add">
 						<tr>

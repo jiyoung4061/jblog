@@ -28,4 +28,8 @@ public class CategoryRepository {
 	public int delete(Long no) {
 		return sqlSession.delete("category.delete", no);
 	}
+
+	public Long findFirstCategory(String id) {
+		return sqlSession.selectOne("category.findfirstno", id);
+	}
 }

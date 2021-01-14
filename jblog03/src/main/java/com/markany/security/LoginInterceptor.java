@@ -10,6 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.markany.jblog.service.UserService;
 import com.markany.jblog.vo.UserVo;
 
+
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	private UserService userService;
@@ -26,7 +27,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		// userService 주입하기!!
 		UserVo authUser = userService.getUser(vo);
-		if(authUser == null) { // 로그인 실패
+		if(authUser == null) {
 			request.setAttribute("userVo", vo);
 			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
 			return false;

@@ -16,8 +16,8 @@
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
 					<li class="selected">기본설정</li>
-					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/blog/admin/category">카테고리</a></li>
-					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/blog/admin/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/admin/category">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/admin/write">글작성</a></li>
 				</ul>
 				<form action="${pageContext.request.contextPath }/${authUser.getId()}/blog/admin" method="post">
 	 		      	<table class="admin-config">
@@ -41,11 +41,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<jsp:include page="/WEB-INF/views/blog/footer.jsp" />
 	</div>
 </body>
 </html>

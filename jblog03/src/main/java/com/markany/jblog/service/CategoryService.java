@@ -30,4 +30,8 @@ public class CategoryService {
 		int count = categoryRepository.delete(no);
 		return count == 1;
 	}
+
+	public Long getFirstCategory(String id) {
+		return categoryRepository.findFirstCategory(id);
+	}
 }
