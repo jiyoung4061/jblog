@@ -19,7 +19,7 @@
 				<div class="blog-content">
 					<h4>${postVo.title }</h4>
 					<p>
-						${postVo.contents }
+						${postVo.contents}	
 					<p>
 				</div>
 				<ul class="blog-list">

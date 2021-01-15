@@ -23,7 +23,7 @@
 		]]>
 	</select>
 	
-	<select id="findPostCount" parameterType="string" resultType="Long">
+	<select id="findpostcount" parameterType="string" resultType="Long">
 		<![CDATA[
 			select p.no, p.name, q.post_count
 			from (select * 

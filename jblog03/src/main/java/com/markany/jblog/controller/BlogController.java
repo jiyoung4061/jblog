@@ -3,6 +3,7 @@ package com.markany.jblog.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,6 @@ public class BlogController {
 	public String index(@PathVariable String id, @PathVariable Optional<Long> category,
 			@PathVariable Optional<Long> post, Model model, @AuthUser UserVo authUser) {
 		
-		System.out.println("main>>"+authUser);
 		BlogVo blogVo = blogService.getBlog(id);
 		List<CategoryVo> categoryVoList = categoryService.getCategoryList(id);
 		
@@ -61,11 +61,9 @@ public class BlogController {
 
 	@Auth
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String admin(@PathVariable String id, @AuthUser UserVo authUser, Model model) {
-		System.out.println("id>>>>" + id);
-		System.out.println("auth>>>>" + authUser);
+	public String admin(@AuthUser UserVo authUser, @PathVariable String id, Model model) {
 		if (!id.equals(authUser.getId())) {
-			return "redirect:/" + authUser.getId();
+			return "redirect:/" + id;
 		}
 		BlogVo vo = blogService.getBlog(id);
 		model.addAttribute("blogVo", vo);
@@ -81,7 +79,7 @@ public class BlogController {
 		}
 		blogService.setMain(vo);
 		model.addAttribute("blogVo", vo);
-		return "redirect:/" + vo.getId() + "blog/blog-main";
+		return "redirect:/" + vo.getId();
 	}
 
 	@Auth
@@ -89,6 +87,9 @@ public class BlogController {
 	public String adminCategory(@PathVariable String id, Model model) {
 		List<CategoryVo> categoryVoList = categoryService.getCategoryList(id);
 //		List<Long> postCount = categoryService.getPostCount(id);
+//		System.out.println("postcount"+postCount);
+		BlogVo vo = blogService.getBlog(id);
+		model.addAttribute("blogVo", vo);
 		model.addAttribute("categoryVoList", categoryVoList);
 		return "blog/blog-admin-category";
 	}
@@ -105,14 +106,14 @@ public class BlogController {
 		categoryVo.setId(id);
 		categoryService.addCategory(categoryVo);
 		model.addAttribute("authUser", authUser);
-		return "redirect:/" + authUser.getId() + "/blog/admin/category";
+		return "redirect:/" + authUser.getId() + "/admin/category";
 	}
 
 	@Auth
 	@RequestMapping(value = "admin/category/delete/{no}", method = RequestMethod.GET)
 	public String deleteCategory(@PathVariable Long no, @AuthUser UserVo authUser) {
 		categoryService.deleteCategory(no);
-		return "redirect:/" + authUser.getId() + "/blog/admin/category";
+		return "redirect:/" + authUser.getId() + "/admin/category";
 	}
 
 	@Auth
@@ -120,7 +121,8 @@ public class BlogController {
 	public String adminWrite(@PathVariable String id, Model model) {
 		List<CategoryVo> categoryVoList = categoryService.getCategoryList(id);
 		model.addAttribute("categoryVoList", categoryVoList);
-
+		BlogVo vo = blogService.getBlog(id);
+		model.addAttribute("blogVo", vo);
 		return "blog/blog-admin-write";
 	}
 

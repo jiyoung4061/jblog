@@ -11,8 +11,6 @@
 				<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
 			</c:when>
 			<c:otherwise>
-			<li><h2>로그인한사람 : ${authUser.id }</h2></li>
-			<li><h2>블로그주인 : ${id }</h2></li>
 				<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
 				<c:if test="${id eq authUser.id }">
 					<li><a href="${pageContext.request.contextPath}/${id }/admin">블로그관리</a></li>

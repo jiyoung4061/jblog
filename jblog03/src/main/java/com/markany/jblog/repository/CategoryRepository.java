@@ -22,7 +22,7 @@ public class CategoryRepository {
 	}
 
 //	public List<Long> findPostCountOfCategory(String id) {
-//		return sqlSession.selectList("categroy.findPostCount", id);
+//		return sqlSession.selectList("categroy.findpostcount", id);
 //	}
 
 	public int delete(Long no) {

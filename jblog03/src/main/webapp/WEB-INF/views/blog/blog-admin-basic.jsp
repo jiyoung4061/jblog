@@ -19,7 +19,7 @@
 					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/admin/category">카테고리</a></li>
 					<li><a href="${pageContext.request.contextPath}/${authUser.getId() }/admin/write">글작성</a></li>
 				</ul>
-				<form action="${pageContext.request.contextPath }/${authUser.getId()}/blog/admin" method="post">
+				<form action="${pageContext.request.contextPath }/${authUser.getId()}/admin" method="post">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>

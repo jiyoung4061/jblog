@@ -12,5 +12,5 @@ import java.lang.annotation.Target;
 						// class : 메모리에 올릴때 annotation을 뺀다.
 public @interface Auth {
 	public String value() default "USER"; // @auth(value="") 설정
-	public Role role() default Role.USER;
+//	public Role role() default Role.USER;
 }
