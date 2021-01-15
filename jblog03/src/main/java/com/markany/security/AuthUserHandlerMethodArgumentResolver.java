@@ -37,7 +37,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		AuthUser authUser = parameter.getParameterAnnotation(AuthUser.class);
-		
+		System.out.println("resolv>>"+authUser);
 		// @AuthUser가 안 붙어있는 경우
 		if(authUser == null) {
 			return false;

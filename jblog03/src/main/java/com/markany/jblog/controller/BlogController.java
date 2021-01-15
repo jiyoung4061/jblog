@@ -39,8 +39,9 @@ public class BlogController {
 
 	@RequestMapping({ "", "/{category}", "/{category}/{post}" })
 	public String index(@PathVariable String id, @PathVariable Optional<Long> category,
-			@PathVariable Optional<Long> post, Model model) {
+			@PathVariable Optional<Long> post, Model model, @AuthUser UserVo authUser) {
 		
+		System.out.println("main>>"+authUser);
 		BlogVo blogVo = blogService.getBlog(id);
 		List<CategoryVo> categoryVoList = categoryService.getCategoryList(id);
 		
@@ -62,7 +63,7 @@ public class BlogController {
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(@PathVariable String id, @AuthUser UserVo authUser, Model model) {
 		System.out.println("id>>>>" + id);
-		System.out.println("auth>>>>" + authUser.getId());
+		System.out.println("auth>>>>" + authUser);
 		if (!id.equals(authUser.getId())) {
 			return "redirect:/" + authUser.getId();
 		}
@@ -83,6 +84,7 @@ public class BlogController {
 		return "redirect:/" + vo.getId() + "blog/blog-main";
 	}
 
+	@Auth
 	@RequestMapping("/admin/category")
 	public String adminCategory(@PathVariable String id, Model model) {
 		List<CategoryVo> categoryVoList = categoryService.getCategoryList(id);

@@ -26,7 +26,6 @@
 					<c:forEach items="${postVoList }" var="vo">
 						<li><a href="${pageContext.request.contextPath }/${id }/${vo.categoryNo}/${vo.no}">${vo.title }</a> <span>${vo.regDate }</span></li>
 					</c:forEach>
-
 				</ul>
 			</div>
 		</div>

@@ -16,7 +16,7 @@
 	
 	<select id="findpostlist" parameterType="Long" resultType="postvo">
 		<![CDATA[
-			select no, title, contents, date_format(reg_date,"%Y/%m/%d") as regDate, category_no
+			select no, title, contents, date_format(reg_date,"%Y/%m/%d") as regDate, category_no as categoryNo
 			from post
 			where category_no=#{category}
 		]]>
