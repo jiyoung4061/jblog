@@ -1,0 +1,70 @@
+
+
+
+192.168.1.212:8080/jblog/kickscar
+192.168.1.212:8080/jblog/dooly
+
+192.168.1.212:8080/jblog/kickscar	: 첫번째 카테고리 : 첫번째 포스트
+192.168.1.212:8080/jblog/kickscar/2	: 2번째 카테고리 : 첫번째 포스트
+192.168.1.212:8080/jblog/kickscar/3/2 : 3번째 카테고리 : 2번째 포스트 (나머지 포스트는 리스트로!)
+
+<mvc:resources location="c:/jblog-uploads/" mapping="/images/**" />
+
+"/jblog03/images/default-logo.jpg"
+
+
+// category안에 post수
+select p.no, p.name, q.post_count
+from category p, (
+		select a.no, count(*) as post_count // post수
+		from category a, post b
+		where a.no = b.category_no	
+		group by a.no
+		) q
+where p.no = q.no;
+
+
+
+======================================================
+>exception / board 만들기
+
+======================================================
+mysite03
+    | ---/ src
+	| ---/ main
+		| ---/ [java]
+		|	| ---/ (com)
+		|	         | ---/ (markany)
+		|	         		| ---/ (mysite)
+		|				| ---/ (repository)
+		|					| --- UserRepository.java
+		|					| --- GuestbookRepository.java 
+		| ---/ [resource]
+			| ---/ (mybatis)
+				| --- configration.xml
+				| ---/ (mappers)
+					| --- user.xml
+					| --- guestbook.xml
+					| --- board.xml
+=======================================================================
+mysite03.war
+     | ---/ WEB-INF
+     |	     | --- lib
+     |	     |	| --- sping-context.jar
+     |	     |	| --- spring-mvc.jar
+     |	     |	| --- . . . .
+     |	     |
+     |	     | --- classes
+     |		| ---/ (com)
+     |		|	| ---/ (markany)
+     |		|		| ---/ (mysite)
+     |		|			| ---/ (repository)
+     |		|				| --- UserRepository.class
+     |		|				| --- GuestbookRepository.class
+     |		| ---/ (mybatis)
+     |			| --- configration.xml
+     |			| ---/ (mappers)
+     |				| --- user.xml
+     |				| --- guestbook.xml
+     |				| --- board.xml
+     | ---/ assets
